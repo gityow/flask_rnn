@@ -5,10 +5,6 @@ import pygame as pg
 # type 1 (synchronous): all tracks start at the same time
 # type 2 (asynchronous): each track is independent of the others
 
-#mid = MidiFile('./midi_files/Super Mario 64 - Medley.mid', clip=True)
-mid = MidiFile('./midi_files/test_music.mid')
-print(mid)
-
 def play_music(music_file):
     '''
     stream music with mixer.music module in blocking manner
@@ -28,7 +24,12 @@ def play_music(music_file):
 
 # pick a midi or MP3 music file you have in the working folder
 # or give full pathname
-music_file = './midi_files/generated_music_v4.mid'
+
+music_file = './tmp/performance_rnn/generated/2020-10-20_231944_03.mid'
+
+#music_file = './midi_files/chopin_nocturne_9_2.mid'
+mid = MidiFile(music_file)
+
 #music_file = "Drumtrack.mp3"
 freq = 44100    # audio CD quality
 bitsize = -16   # unsigned 16 bit
@@ -45,3 +46,4 @@ except KeyboardInterrupt:
     pg.mixer.music.fadeout(1000)
     pg.mixer.music.stop()
     raise SystemExit
+

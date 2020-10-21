@@ -1,14 +1,35 @@
 from magenta.models.performance_rnn import performance_sequence_generator
 from magenta.models.shared import sequence_generator_bundle
+from magenta.models.performance_rnn import performance_model
 
 from note_seq.protobuf import generator_pb2
 from note_seq.protobuf import music_pb2
 from note_seq import midi_io
 import note_seq  #https://github.com/magenta/note-seq
 import os
+import ast # abstract syntax trees
+
+def generate_sequence(selected_model="performance", midi_file=None):
+    # midi_file = "chopin_nocturne.mid" #TODO enable uploads of midi files or use defaults
+
+    if midi_file:
+        cmd = f"""
+        performance_rnn_generate \
+        --config="{selected_model}" \
+        --bundle_file="./models/{selected_model}.mag" \
+        --output_dir="./generated" \
+        --num_outputs=1 \
+        --num_steps=1000 \ 
+        --primer_pitches="./midi_files/{midi_file}
+    
+        """ # TODO: play around with outputs files
+
+    os.system(cmd)
+
+    if
 
 
-def generate_sequence(selected_model):
+def old_generate_sequence(selected_model, temp = 0.9):
 
     # downloaded mag files from here
     # https://github.com/magenta/magenta/tree/master/magenta/models/performance_rnn
@@ -31,17 +52,29 @@ def generate_sequence(selected_model):
     generator = generator_map[MODEL_NAME](checkpoint=None, bundle=bundle)
     generator.initialize()
     generator_options = generator_pb2.GeneratorOptions()
-    generator_options.args['temperature'].float_value = 1.0  # Higher is more random; 1.0 is default. Try 0.9 to 2.0
+    generator_options.args['temperature'].float_value = temp  # Higher is more random; 1.0 is default. Try 0.9 to 2.0
     generate_section = generator_options.generate_sections.add(start_time=0, end_time=30)
 
-    sequence = generator.generate(music_pb2.NoteSequence(), generator_options) # magic , log likelihood -3794.191895
-    midi_io.note_sequence_to_midi_file(sequence,'./midi_files/generated_music_v4.mid')
+    #init_seq = music_pb2.NoteSequence()
+    primer_melody = note_seq.Melody(ast.literal_eval("[60,62,64,65,67,69,71,72]"))
+    primer_sequence = primer_melody.to_sequence()
+
+    generate_section = generator_options.generate_sections.add(
+        start_time=primer_sequence.total_time,
+        end_time=generate_end_time)
+
+    sequence = generator.generate(primer_sequence, generator_options) # magic , log likelihood -3794.191895
+
+    midi_io.note_sequence_to_midi_file(init_seq,'./midi_files/init_seq.mid')
+    midi_io.note_sequence_to_midi_file(sequence, './midi_files/gen_seq.mid')
 
     return sequence
 
 
-note_seq.play_sequence(sequence, note_seq.midi_synth.fluidsynth,
-                 sf2_path='/tmp/Yamaha-C5-Salamander-JNv5.1.sf2')
+
+seq = generate_sequence('performance', temp = 0.9)
+seq2 = generator.generate(seq, generator_options) # magic , log likelihood -3794.191895
+
 
 def make_music(model, details, input_seq, generator_options):
     """
