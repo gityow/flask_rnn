@@ -8,25 +8,27 @@ from note_seq import midi_io
 import note_seq  #https://github.com/magenta/note-seq
 import os
 import ast # abstract syntax trees
+import numpy as np
 
 def generate_sequence(selected_model="performance", midi_file=None):
     # midi_file = "chopin_nocturne.mid" #TODO enable uploads of midi files or use defaults
 
     if midi_file:
+        mid = mido(midi_file)
+        length = np.floor(mid.length*100)
         cmd = f"""
         performance_rnn_generate \
         --config="{selected_model}" \
         --bundle_file="./models/{selected_model}.mag" \
         --output_dir="./generated" \
         --num_outputs=1 \
-        --num_steps=1000 \ 
+        --num_steps={length} \ 
         --primer_pitches="./midi_files/{midi_file}
     
         """ # TODO: play around with outputs files
 
     os.system(cmd)
 
-    if
 
 
 def old_generate_sequence(selected_model, temp = 0.9):

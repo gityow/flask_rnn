@@ -24,13 +24,16 @@ Some uses of the Performance RNN: https://www.youtube.com/watch?v=Ye0Geuo1Iu8
 Good Practices for Deployment: https://flask.palletsprojects.com/en/1.1.x/deploying/#deployment
 Flask Tutorial https://rollout.io/blog/python-feature-flag-guide/
 working with midi files: https://www.twilio.com/blog/working-with-midi-data-in-python-using-mido
-MIDI trimmer: https://solmire.com/midieditor/editor.php (to make the midi files 30 sec clips)
+MIDI Editor: https://solmire.com/midieditor/editor.php (to speed up/slow down midi files)
+MIDI Trimmer: http://midi.mathewvp.com/midiTrim.php (to make the midi files into shorter clips)
+MIDI Timing Explanation: https://sites.uci.edu/camp2014/2014/05/19/timing-in-midi-files/
 
 Todo:
 Test model selection in form
 Embed Bokeh into HTML
 Play sequence upon model selection
 Trim more 30 sec clips (Erik Satie Trois Gymnopedies , moonlight sonata)
-Try out num steps argument 
+Try out num steps argument <-- done -->
+Find a midi player for flask 
 
  
