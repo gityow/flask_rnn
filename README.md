@@ -6,7 +6,7 @@ To run app:
 1. export FLASK_APP=app.py
 2. flask run
 
-![Screenshot1](https://github.com/gityow/flask_rnn/tree/main/screenshots/app.png?raw=true)
+![Screenshot1](https://github.com/gityow/flask_rnn/blob/main/screenshots/app.png?raw=true)
 
 Documentation for Magenta:  
 https://github.com/magenta/magenta/tree/master/magenta/models/performance_rnn
