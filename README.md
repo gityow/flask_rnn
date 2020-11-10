@@ -6,6 +6,8 @@ To run app:
 1. export FLASK_APP=app.py
 2. flask run
 
+![Screenshot1](https://github.com/gityow/flask_rnn/tree/master/images/app.png?raw=true)
+
 Documentation for Magenta:  
 https://github.com/magenta/magenta/tree/master/magenta/models/performance_rnn
 
@@ -17,8 +19,6 @@ jointly predicts notes and also expressive timing and dynamic.
 
 Keywords: beam search, LSTM, teacher forcing
 
-
-
 Twimlai: https://www.youtube.com/watch?v=8AARfVVrdXc
 Some uses of the Performance RNN: https://www.youtube.com/watch?v=Ye0Geuo1Iu8
 Good Practices for Deployment: https://flask.palletsprojects.com/en/1.1.x/deploying/#deployment
@@ -28,8 +28,11 @@ MIDI Editor: https://solmire.com/midieditor/editor.php (to speed up/slow down mi
 MIDI Trimmer: http://midi.mathewvp.com/midiTrim.php (to make the midi files into shorter clips)
 MIDI Timing Explanation: https://sites.uci.edu/camp2014/2014/05/19/timing-in-midi-files/
 
+Types of Models all translates position and velocity to complexity, pitch and tempo
+Performance - Basic performance model that  
+
 Todo:
-Test model selection in form
+Test model selection in form <-- done -->
 Embed Bokeh into HTML
 Play sequence upon model selection
 Trim more 30 sec clips (Erik Satie Trois Gymnopedies , moonlight sonata)

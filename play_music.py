@@ -25,9 +25,8 @@ def play_music(music_file):
 # pick a midi or MP3 music file you have in the working folder
 # or give full pathname
 
-music_file = './tmp/performance_rnn/generated/2020-10-20_231944_03.mid'
-
-#music_file = './midi_files/chopin_nocturne_9_2.mid'
+#music_file = './midi_files/chopin_nocturne.mid'
+#music_file = './midi_files/satie_gymnopedie_no1.mid'
 mid = MidiFile(music_file)
 
 #music_file = "Drumtrack.mp3"
