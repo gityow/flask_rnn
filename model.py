@@ -9,7 +9,7 @@ from mido import MidiFile
 def generate_sequence(selected_model="performance", selected_music=None):
     # midi_file = "chopin_nocturne.mid" #TODO enable uploads of midi files or use defaults
 
-    if midi_file:
+    if selected_music :
         filepath = f"./midi_files/{selected_music}"
         mid = MidiFile(filepath)
         length = np.int(np.floor(mid.length*100))
@@ -19,7 +19,7 @@ def generate_sequence(selected_model="performance", selected_music=None):
         --output_dir ./generated \
         --num_outputs 1 \
         --num_steps {length} \
-        --primer_midi ./midi_files/{midi_file}"
+        --primer_midi ./midi_files/{selected_music}"
 
     else:
         cmd = f"""cat no midil file given"""
